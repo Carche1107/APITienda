@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/devoluciones.css">
+    <title>AvvaleTienda</title>
+</head>
+<body>
+    <div class="formbold-main-wrapper">
+        <div class="formbold-form-wrapper">
+            <form onsubmit="event.preventDefault(); buscarStocks();" method="POST">
+                <div class="formbold-input-flex">
+                    <div>
+                        <select id="idProducto" class="formbold-form-input"></select>
+                        <label for="idProducto" class="formbold-form-label"> Producto </label>
+                    </div>
+                    <div>
+                        <select id="idColor" class="formbold-form-input"></select>
+                        <label for="idColor" class="formbold-form-label"> Color </label>
+                    </div>
+                </div>
+                <button class="formbold-btn">
+                  Buscar Stock
+                </button>
+                <button onclick="redirectToPage('home')" class="formbold-btn">
+                  Home
+                </button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tienda</th>
+                        <th>Producto</th>
+                        <th>Color</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody id="TableBody">
+                </tbody>
+            </table>
+        </div>
+      </div>
+      <script src="js/stocks.js"></script>
+      <script src="js/home.js"></script>
+</body>
+</html>

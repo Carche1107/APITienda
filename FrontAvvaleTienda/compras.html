@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/devoluciones.css">
+    <title>AvvaleTienda</title>
+</head>
+<body>
+    <div class="formbold-main-wrapper">
+        <div class="formbold-form-wrapper">
+          <form onsubmit="event.preventDefault(); Comprar();" method="POST">
+              <div class="formbold-input-flex">
+                <div>
+                    <select id="idTienda" class="formbold-form-input"></select>
+                    <label for="idTienda" class="formbold-form-label"> Tienda </label>
+                </div>
+                <div>
+                    <select id="idProducto" class="formbold-form-input"></select>
+                    <label for="idProducto" class="formbold-form-label"> Producto </label>
+                </div>
+              </div>
+      
+              <div class="formbold-input-flex">
+                <div>
+                    <select id="idColor" class="formbold-form-input"></select>
+                    <label for="idColor" class="formbold-form-label"> Color </label>
+                </div>
+                <div>
+                    <input
+                    type="number"
+                    name="totalProducts"
+                    id="totalProducts"
+                    placeholder="1"
+                    class="formbold-form-input"
+                    />
+                    <label for="totalProducts" class="formbold-form-label"> Cantidad </label>
+                </div>
+                <div>
+                    <input
+                    type="datetime-local"
+                    name="datetime"
+                    id="datetime"
+                    placeholder="1"
+                    class="formbold-form-input"
+                    />
+                    <label for="datetime" class="formbold-form-label"> Fecha y Hora </label>
+                </div>
+              </div>
+              <button class="formbold-btn">
+                Comprar
+              </button>
+              <button onclick="redirectToPage('home')" class="formbold-btn">
+                Home
+              </button>
+          </form>
+        </div>
+      </div>
+    <script src="js/compras.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>

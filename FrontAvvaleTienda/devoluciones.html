@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/devoluciones.css">
+    <title>AvvaleTienda</title>
+</head>
+<body>
+    <div class="formbold-main-wrapper">
+        <div class="formbold-form-wrapper">
+          <form onsubmit="event.preventDefault(); BuscarVentas();" method="GET">
+              <div class="formbold-input-flex">
+                <div>
+                    
+                    <select id="idTienda" class="formbold-form-input">
+
+                    </select>
+                    <label for="idTienda" class="formbold-form-label"> Tienda </label>
+                </div>
+                <div>
+                    <select id="dia" class="formbold-form-input">
+                        <option value="MONDAY">Lunes</option>
+                        <option value="TUESDAY">Martes</option>
+                        <option value="WEDNESDAY">Miercoles</option>
+                        <option value="THURSDAY">Jueves</option>
+                        <option value="FRIDAY">Viernes</option>
+                        <option value="SATURDAY">Sabado</option>
+                        <option value="SUNDAY">Domingo</option>
+                    </select>
+                    <label for="dia" class="formbold-form-label"> Dia </label>
+                </div>
+              </div>
+      
+              <div class="formbold-input-flex">
+                <div>
+                    <input
+                    type="number"
+                    name="hora"
+                    id="hora"
+                    placeholder=""
+                    class="formbold-form-input"
+                    />
+                    <label for="hora" class="formbold-form-label"> Hora </label>
+                </div>
+                <div>
+                    <input
+                    type="number"
+                    name="minuto"
+                    id="minuto"
+                    placeholder=""
+                    class="formbold-form-input"
+                    />
+                    <label for="minuto" class="formbold-form-label"> Minuto </label>
+                </div>
+              </div>
+              <button class="formbold-btn">
+                  Buscar Ventas
+              </button>
+          </form>
+          <h2>Listado de Ventas</h2>
+          <table>
+            <thead>
+                <tr>
+                    <th>Tienda</th>
+                    <th>Producto</th>
+                    <th>Color</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                    <th>Dia de la Semana</th>
+                </tr>
+            </thead>
+            <tbody id="TableBody">
+            </tbody>
+          </table>
+          <button onclick="redirectToPage('home')" class="formbold-btn">
+            Home
+          </button>
+        </div>
+        
+      </div>
+    <script src="js/devoluciones.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>
