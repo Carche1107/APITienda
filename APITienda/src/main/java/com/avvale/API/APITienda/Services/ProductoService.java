@@ -18,7 +18,7 @@ public class ProductoService {
     public ProductoModel findById(Long id) {
         return productoRepository.findById(id).orElse(null);
     }
-
+    //Listar Id y Nombre de productos para mostrarlos en Combo en Front
     public List<ProductListDTO> getProducts() {
         List<Object[]> colors = productoRepository.getProducts();
         return colors.stream().map(row -> new ProductListDTO((Long) row[0], (String) row[1])).collect(Collectors.toList());

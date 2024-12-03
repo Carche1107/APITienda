@@ -1,7 +1,6 @@
 package com.avvale.API.APITienda.Controllers;
 
 import com.avvale.API.APITienda.DTO.ColorListDTO;
-import com.avvale.API.APITienda.DTO.ShopListDTO;
 import com.avvale.API.APITienda.Services.ColorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ public class ColorController {
 
     @Autowired
     ColorService colorService;
-
+    //obtener Listado de Id y Nombre de Color
     @GetMapping
     public ResponseEntity<List<ColorListDTO>> getAll() {
         List<ColorListDTO> shops = colorService.getColors();

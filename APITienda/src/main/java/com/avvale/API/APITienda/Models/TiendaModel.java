@@ -23,12 +23,6 @@ public class TiendaModel {
     @Column(nullable = false)
     private BigDecimal CurrentCash;
 
-    /*@OneToMany(mappedBy = "tienda", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<StockModel> stocks;
-
-    @OneToMany(mappedBy = "IdShop", cascade = CascadeType.PERSIST)
-    private List<SalesModel> sales;*/
-
     public BigDecimal getCurrentCash() {
         return CurrentCash;
     }
@@ -60,22 +54,6 @@ public class TiendaModel {
     public Double getIncrement() {
         return Increment;
     }
-
-    /*public List<StockModel> getStocks() {
-        return stocks;
-    }
-
-    public void setStocks(List<StockModel> stocks) {
-        this.stocks = stocks;
-    }
-
-    public List<SalesModel> getSales() {
-        return sales;
-    }
-
-    public void setSales(List<SalesModel> sales) {
-        this.sales = sales;
-    }*/
 
     @PrePersist
     public void setInitialCash() {

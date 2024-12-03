@@ -3,7 +3,6 @@ package com.avvale.API.APITienda.Models;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Table(name = "Product")
@@ -19,12 +18,6 @@ public class ProductoModel {
 
     @Column(nullable = false)
     private BigDecimal InitialPrice;
-
-    /*@OneToMany(mappedBy = "stock_product_FK", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<StockModel> stocks;
-
-    @OneToMany(mappedBy = "Ventas_product_FK", cascade = CascadeType.PERSIST)
-    private List<StockModel> sales;*/
 
     public Long getId() {
         return Id;
@@ -42,13 +35,6 @@ public class ProductoModel {
         this.Type = type;
     }
 
-    /*public List<StockModel> getStocks() {
-        return stocks;
-    }
-
-    public void setStocks(List<StockModel> stocks) {
-        this.stocks = stocks;
-    }*/
 
     public BigDecimal getInitialPrice() {
         return InitialPrice;
@@ -58,11 +44,4 @@ public class ProductoModel {
         InitialPrice = initialPrice;
     }
 
-    /*public List<StockModel> getSales() {
-        return sales;
-    }
-
-    public void setSales(List<StockModel> sales) {
-        this.sales = sales;
-    }*/
 }

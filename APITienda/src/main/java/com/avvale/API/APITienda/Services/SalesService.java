@@ -42,7 +42,7 @@ public class SalesService {
     public ArrayList<SalesModel> Test(){
         return (ArrayList<SalesModel>) salesRepository.findAll();
     }
-
+    //FUncion de mapeo del SaleDTO al Modelo de la venta
     public SalesModel mapDTO(SalesDTO salesDTO, ProductoModel producto, TiendaModel tienda, ColorModel color){
         if (salesDTO == null) {
             throw new IllegalArgumentException("El DTO no puede ser nulo");
@@ -65,7 +65,7 @@ public class SalesService {
         return salesModel;
 
     }
-//Cambiar a SalesModel
+    //Se realiza la venta
     public ResponseEntity<String> SellProduct(SalesDTO sale) {
 
         if (sale == null) {
@@ -74,15 +74,16 @@ public class SalesService {
         if (sale.getIdProduct() == null || sale.getIdColor() == null || sale.getIdShop() == null) {
             throw new RuntimeException("No se ha podido completar la venta, falta color, tienda o producto");
         }
-
+        //Obtenemos los modelos de la tienda, producto y color en funcion del id
         TiendaModel tienda = tiendaService.findById(sale.getIdShop());
         ProductoModel producto = productoService.findById(sale.getIdProduct());
         ColorModel color = colorService.findById(sale.getIdColor());
+        //Seteamos el precio base con el precio base del producto
         sale.setInitialPrice(producto.getInitialPrice().setScale(2, RoundingMode.HALF_UP));
+        //Sumamos al precio base el incremento de la tienda
         sale.setTotalPrice(sale.getInitialPrice().setScale(2, RoundingMode.HALF_UP).multiply(((BigDecimal.valueOf(tienda.getIncrement())).add(BigDecimal.ONE))));
-        //sale.setTime(LocalDateTime.now());
 
-
+        //EN funcion del tipo de incremento, sumamos al precio total el incremento porcentual o el precio fijo
         switch (color.getIncrement_Type()){
             case M -> {
                 sale.setTotalPrice(sale.getTotalPrice().setScale(2, RoundingMode.HALF_UP).add(BigDecimal.valueOf(color.getIncrement()).setScale(2, RoundingMode.HALF_UP)));
@@ -91,31 +92,33 @@ public class SalesService {
                 sale.setTotalPrice(sale.getTotalPrice().multiply((BigDecimal.valueOf(color.getIncrement()).setScale(2, RoundingMode.HALF_UP).add(BigDecimal.ONE))));
             }
         }
-
+        //Seteamos el dinero que se ha incrementado al precio base
         sale.setIncrementApplied(sale.getTotalPrice().setScale(2, RoundingMode.HALF_UP).subtract(sale.getInitialPrice().setScale(2, RoundingMode.HALF_UP)).doubleValue());
-
+        //Obtenemos el mejor descuento en funcion del dia de la semana y la hora y obtenemos el descuento del precio que se obtiene
         List<DiscountPriceDTO> discounts = discountService.findDiscountsByDayAndTime(sale.getTime().getDayOfWeek().toString(), sale.getTime().getHour(), sale.getTotalPrice().setScale(2, RoundingMode.HALF_UP));
 
         BigDecimal discApplied = new BigDecimal(String.valueOf(discounts.getFirst().getDiscount())).setScale(2, RoundingMode.HALF_UP);
         sale.setTotalPrice(discounts.getFirst().getDiscountPrice().setScale(2, RoundingMode.HALF_UP));
+        //seteamos el dinero descontado
         sale.setDiscountApplied(discApplied.doubleValue());
 
-
+        //Multiplicamos el precio final por el número de productos que se compran
         sale.setTotalPrice(sale.getTotalPrice().multiply(new BigDecimal(sale.getTotalProducts().toString())));
-
+        //Actualizamos el stock del producto comprado y sumamos el precio Total a la caja de la tienda
         stockService.updateStockAmount(sale.getIdProduct(), sale.getIdColor(), sale.getIdShop(), sale.getTotalProducts());
         tiendaService.updateCashAdd(tienda, sale.getTotalPrice());
 
-
+        //Mapeamos el DTO a un Modelo de la venta
         SalesModel salesModel = mapDTO(sale, producto, tienda, color);
 
         //salesModel.setTime(LocalDateTime.now());
-
+        //Creamos la compra
         salesRepository.save(salesModel);
         return ResponseEntity.ok("Compra realizada con éxito");
         //return salesModel;
     }
 
+    //Listado para la lista de ventas realizadas segun la tienda, el dia, la hora y el minuto que se realizó la compra
     public List<ReturnsDTO>getAllSalesByDayAndHour(Long ShopId, String Day, Integer Hour, Integer Minute) {
 
         List<Object[]> sales = salesRepository.findSalesByDayAndHour(ShopId, Day, Hour, Minute);

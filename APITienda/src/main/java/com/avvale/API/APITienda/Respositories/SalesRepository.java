@@ -1,6 +1,5 @@
 package com.avvale.API.APITienda.Respositories;
 
-import com.avvale.API.APITienda.DTO.ReturnsDTO;
 import com.avvale.API.APITienda.Models.SalesModel;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

@@ -1,7 +1,6 @@
 package com.avvale.API.APITienda.Respositories;
 
 
-import com.avvale.API.APITienda.Enums.IncrementType;
 import com.avvale.API.APITienda.Models.ColorModel;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

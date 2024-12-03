@@ -21,32 +21,29 @@ public class TiendaService {
 
     public TiendaModel findById(Long Id) { return tiendaRepository.findById(Id).orElse(null);}
 
-    //PUNTO 4: Listado de las cajas de cada tienda e la hora actual
+    //Listado de las cajas de cada tienda en la hora actual
     public ShopDetailsWithTimeDTO ObtenerCajasActuales() {
 
         List<Object[]> shops = tiendaRepository.findActualCash();
         List<ShopCurrentCashDTO> AllShops = shops.stream().map(row -> new ShopCurrentCashDTO((String) row[0], new BigDecimal(row[1].toString()))).collect(Collectors.toList());
         return new ShopDetailsWithTimeDTO(AllShops);
     }
-
+    //Sumar precio de compra a la caja
     public void updateCashAdd(TiendaModel tienda, BigDecimal Cash) {
         tienda.setCurrentCash(tienda.getCurrentCash().add(Cash));
         tiendaRepository.save(tienda);
     }
+    //Restar devolucion a la caja
     public void updateCashSubstract(TiendaModel tienda, BigDecimal Cash) {
         tienda.setCurrentCash(tienda.getCurrentCash().subtract(Cash));
         tiendaRepository.save(tienda);
     }
-
+    //Listar Id y Nombre de tiendas para mostrarlos en Combo en Front
     public List<ShopListDTO> getShops() {
 
         List<Object[]> shops = tiendaRepository.getIdAndName();
         return shops.stream().map(row -> new ShopListDTO((Long) row[0], (String) row[1])).collect(Collectors.toList());
     }
 
-    //public int updateShopCurrentCash(BigDecimal currentCash, Long tiendaId) {
-
-
-    //}
 
 }

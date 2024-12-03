@@ -4,7 +4,6 @@ import com.avvale.API.APITienda.Enums.DayType;
 import com.avvale.API.APITienda.Enums.IncrementType;
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 
 @Entity
 @Table( name = "Discounts")

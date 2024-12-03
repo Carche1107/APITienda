@@ -1,7 +1,6 @@
 package com.avvale.API.APITienda.Controllers;
 
 import com.avvale.API.APITienda.DTO.ProductListDTO;
-import com.avvale.API.APITienda.DTO.ShopListDTO;
 import com.avvale.API.APITienda.Services.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ public class ProductoController {
 
     @Autowired
     ProductoService productoService;
-
+    //obtener Listado de Id y Nombre de Producto
     @GetMapping
     public ResponseEntity<List<ProductListDTO>> getAll() {
         List<ProductListDTO> shops = productoService.getProducts();

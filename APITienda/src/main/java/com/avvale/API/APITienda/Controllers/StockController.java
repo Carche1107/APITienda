@@ -2,8 +2,6 @@ package com.avvale.API.APITienda.Controllers;
 
 import com.avvale.API.APITienda.DTO.StockDetailsDTO;
 import com.avvale.API.APITienda.DTO.StockListWithPrice;
-import com.avvale.API.APITienda.Models.SalesModel;
-import com.avvale.API.APITienda.Models.StockModel;
 import com.avvale.API.APITienda.Services.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +16,13 @@ public class StockController {
     @Autowired
     StockService stockService;
 
-    //PUNTO 5: DEVOLVER EL STOCK DE UN PRODUCTO Y COLOR DADO DE CADA TIENDA
+    //DEVOLVER EL STOCK DE UN PRODUCTO Y COLOR DADO DE CADA TIENDA
     @GetMapping
     public List<StockListWithPrice> getStockListWithPrice(){
         return stockService.getPrices();
     }
 
+    //Para obtener el listado de todos los stocks en función del producto y el color
     @GetMapping(path = "/product")
     public ResponseEntity<List<StockDetailsDTO>> getStockDetails(@RequestParam("product") Long productId, @RequestParam("color") Long colorId){
 

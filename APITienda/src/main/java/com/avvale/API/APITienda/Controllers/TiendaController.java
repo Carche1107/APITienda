@@ -1,13 +1,10 @@
 package com.avvale.API.APITienda.Controllers;
 
-import com.avvale.API.APITienda.DTO.ShopCurrentCashDTO;
 import com.avvale.API.APITienda.DTO.ShopDetailsWithTimeDTO;
 import com.avvale.API.APITienda.DTO.ShopListDTO;
 import com.avvale.API.APITienda.Services.TiendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +17,7 @@ public class TiendaController {
     @Autowired
     TiendaService tiendaService;
 
+    //Obtener Listado de Tiendas para combo
     @GetMapping
     public ResponseEntity<List<ShopListDTO>> getAll() {
         List<ShopListDTO> shops = tiendaService.getShops();

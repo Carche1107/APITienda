@@ -3,8 +3,6 @@ package com.avvale.API.APITienda.Models;
 
 import com.avvale.API.APITienda.Enums.IncrementType;
 import jakarta.persistence.*;
-import java.util.List;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "Color")
