@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -91,12 +92,14 @@ public class SalesService {
             }
         }
 
-        sale.setIncrementApplied(sale.getTotalPrice().subtract(sale.getInitialPrice()).doubleValue());
+        sale.setIncrementApplied(sale.getTotalPrice().setScale(2, RoundingMode.HALF_UP).subtract(sale.getInitialPrice().setScale(2, RoundingMode.HALF_UP)).doubleValue());
 
-        List<DiscountPriceDTO> discounts = discountService.findDiscountsByDayAndTime(sale.getTime().getDayOfWeek().toString(), sale.getTime().getHour(), sale.getTotalPrice());
+        List<DiscountPriceDTO> discounts = discountService.findDiscountsByDayAndTime(sale.getTime().getDayOfWeek().toString(), sale.getTime().getHour(), sale.getTotalPrice().setScale(2, RoundingMode.HALF_UP));
 
+        BigDecimal discApplied = new BigDecimal(String.valueOf(discounts.getFirst().getDiscount())).setScale(2, RoundingMode.HALF_UP);
         sale.setTotalPrice(discounts.getFirst().getDiscountPrice().setScale(2, RoundingMode.HALF_UP));
-        sale.setDiscountApplied(discounts.getFirst().getDiscount());
+        sale.setDiscountApplied(discApplied.doubleValue());
+
 
         sale.setTotalPrice(sale.getTotalPrice().multiply(new BigDecimal(sale.getTotalProducts().toString())));
 
