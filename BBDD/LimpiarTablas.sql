@@ -1,0 +1,16 @@
+-- SCRIPT DE BORRADO DE DATOS
+DELETE FROM stock;
+DELETE FROM returns;
+DELETE FROM discounts;
+DELETE FROM Ventas;
+DELETE FROM color;
+DELETE FROM product;
+DELETE FROM shop;
+
+DROP TABLE stock;
+DROP TABLE returns;
+DROP TABLE discounts;
+DROP TABLE Ventas;
+DROP TABLE color;
+DROP TABLE product;
+DROP TABLE shop;
